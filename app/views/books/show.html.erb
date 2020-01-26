@@ -1,0 +1,43 @@
+<div class="container">
+<div class="row">
+  <div class="col-xs-3">
+    <%= flash[:success] %>
+    <%= render 'users/info',{user:@book.user} %>
+
+    <%= render 'side',{book:@post, user:@book.user} %>
+  </div>
+
+  <div class="col-xs-9">
+
+    <table class="table">
+    <h2>Book detail</h2>
+
+
+      <tr>
+        <th>
+          <p>
+           <%= attachment_image_tag @book.user, :profile_image, size: '40x40',format:'jpeg', class: "pull-left profile-img", fallback: "no_image.jpg" %>
+           <%= link_to @user.name ,user_path(@user.id) %>
+          </p>
+        </th>
+        <th><a><%= @book.title %></a></th>
+        <th><%= @book.body %></th>
+
+
+
+            <% if @book.user == current_user %>
+        <td>
+           <button type="button" class="btn btn-success"><%= link_to "Edit",edit_book_path, class: "edit_book_#{@book.id}" %></button>
+        </td>
+        <td>
+         <button type="button" class="btn btn-danger"><%= link_to "Destroy",book_path,method: :delete, class: "destroy_book_#{@book.id}" %></button>
+        </td>
+        <% end %>
+
+      </tr>
+
+  </table>
+
+  </div>
+</div>
+</div>
